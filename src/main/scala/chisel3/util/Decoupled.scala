@@ -21,6 +21,7 @@ import scala.annotation.nowarn
   * @groupdesc Signals The actual hardware fields of the Bundle
   */
 abstract class ReadyValidIO[+T <: Data](gen: T) extends Bundle {
+
   /** Indicates that the consumer is ready to accept the data this cycle
     * @group Signals
     */
@@ -241,9 +242,7 @@ class Queue[T <: Data](
   val pipe:           Boolean = false,
   val flow:           Boolean = false,
   val useSyncReadMem: Boolean = false,
-  val hasFlush:       Boolean = false
-)(
-  implicit compileOptions: chisel3.CompileOptions)
+  val hasFlush:       Boolean = false)
     extends Module() {
   require(entries > -1, "Queue must have non-negative number of entries")
   require(entries != 0, "Use companion object Queue.apply for zero entries")
