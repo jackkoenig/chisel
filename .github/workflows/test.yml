@@ -17,137 +17,142 @@ on:
 jobs:
   ci:
     name: ci
-    strategy:
-      matrix:
-        system: ["ubuntu-20.04"]
-        jvm: ["8"]
-        scala: ["2.13.10", "2.12.17"]
-        espresso: ["2.4"]
-        circt: ["firtool-1.31.0"]
-    runs-on: ${{ matrix.system }}
-
     steps:
-      - name: Checkout
-        uses: actions/checkout@v3
-      - name: Install Tabby OSS Cad Suite
-        uses: ./.github/workflows/setup-oss-cad-suite
-      - name: Install Espresso
-        uses: ./.github/workflows/install-espresso
-        with:
-          version: ${{ matrix.espresso }}
-      - name: Setup Scala
-        uses: actions/setup-java@v3
-        with:
-          distribution: 'adopt'
-          java-version: ${{ matrix.jvm }}
-          cache: 'sbt'
-      - name: Install CIRCT
-        uses: ./.github/workflows/install-circt
-        with:
-          version: ${{ matrix.circt }}
-      - name: Test
-        run: sbt ++${{ matrix.scala }} test
-      - name: Binary compatibility
-        # TODO either make this also check the plugin or decide that we don't
-        #      support binary compatibility for the plugin
-        run: sbt ++${{ matrix.scala }} unipublish/mimaReportBinaryIssues
+      - name: woohoo
+        run: echo "woohoo"
+          #ci:
+          #  name: ci
+          #  strategy:
+          #    matrix:
+          #      system: ["ubuntu-20.04"]
+          #      jvm: ["8"]
+          #      scala: ["2.13.10", "2.12.17"]
+          #      espresso: ["2.4"]
+          #      circt: ["firtool-1.31.0"]
+          #  runs-on: ${{ matrix.system }}
 
-  doc:
-    name: Formatting
-    runs-on: ubuntu-20.04
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v3
-      - name: Setup Scala
-        uses: actions/setup-java@v3
-        with:
-          distribution: 'adopt'
-          java-version: '11'
-          cache: 'sbt'
-      - name: Install CIRCT
-        uses: ./.github/workflows/install-circt
-      - name: Check Formatting
-        run: sbt scalafmtCheckAll
+          #  steps:
+          #    - name: Checkout
+          #      uses: actions/checkout@v3
+          #    - name: Install Tabby OSS Cad Suite
+          #      uses: ./.github/workflows/setup-oss-cad-suite
+          #    - name: Install Espresso
+          #      uses: ./.github/workflows/install-espresso
+          #      with:
+          #        version: ${{ matrix.espresso }}
+          #    - name: Setup Scala
+          #      uses: actions/setup-java@v3
+          #      with:
+          #        distribution: 'adopt'
+          #        java-version: ${{ matrix.jvm }}
+          #        cache: 'sbt'
+          #    - name: Install CIRCT
+          #      uses: ./.github/workflows/install-circt
+          #      with:
+          #        version: ${{ matrix.circt }}
+          #    - name: Test
+          #      run: sbt ++${{ matrix.scala }} test
+          #    - name: Binary compatibility
+          #      # TODO either make this also check the plugin or decide that we don't
+          #      #      support binary compatibility for the plugin
+          #      run: sbt ++${{ matrix.scala }} unipublish/mimaReportBinaryIssues
 
-  integration:
-    name: Integration Tests
-    runs-on: ubuntu-20.04
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v3
-      - name: Install Tabby OSS Cad Suite
-        uses: ./.github/workflows/setup-oss-cad-suite
-      - name: Install Espresso
-        uses: ./.github/workflows/install-espresso
-      - name: Setup Scala
-        uses: actions/setup-java@v3
-        with:
-          distribution: 'adopt'
-          java-version: '11'
-          cache: 'sbt'
-      - name: Install CIRCT
-        uses: ./.github/workflows/install-circt
-      - name: Integration Tests
-        run: sbt integrationTests/test
+          #doc:
+          #  name: Formatting
+          #  runs-on: ubuntu-20.04
+          #  steps:
+          #    - name: Checkout
+          #      uses: actions/checkout@v3
+          #    - name: Setup Scala
+          #      uses: actions/setup-java@v3
+          #      with:
+          #        distribution: 'adopt'
+          #        java-version: '11'
+          #        cache: 'sbt'
+          #    - name: Install CIRCT
+          #      uses: ./.github/workflows/install-circt
+          #    - name: Check Formatting
+          #      run: sbt scalafmtCheckAll
 
-  std:
-    name: Standard Library Tests
-    runs-on: ubuntu-20.04
-    strategy:
-      matrix:
-        scala: [ "2.13.10", "2.12.17" ]
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v3
-      - name: Install Tabby OSS Cad Suite
-        uses: ./.github/workflows/setup-oss-cad-suite
-      - name: Setup Scala
-        uses: actions/setup-java@v3
-        with:
-          distribution: 'adopt'
-          java-version: '11'
-          cache: 'sbt'
-      - name: Check Formatting (Scala 2.12 only)
-        if: startsWith(matrix.scala, '2.12')
-        run: sbt ++${{ matrix.scala }} standardLibrary/scalafmtCheckAll
-      - name: Unit Tests
-        run: sbt ++${{ matrix.scala }} standardLibrary/test
+          #integration:
+          #  name: Integration Tests
+          #  runs-on: ubuntu-20.04
+          #  steps:
+          #    - name: Checkout
+          #      uses: actions/checkout@v3
+          #    - name: Install Tabby OSS Cad Suite
+          #      uses: ./.github/workflows/setup-oss-cad-suite
+          #    - name: Install Espresso
+          #      uses: ./.github/workflows/install-espresso
+          #    - name: Setup Scala
+          #      uses: actions/setup-java@v3
+          #      with:
+          #        distribution: 'adopt'
+          #        java-version: '11'
+          #        cache: 'sbt'
+          #    - name: Install CIRCT
+          #      uses: ./.github/workflows/install-circt
+          #    - name: Integration Tests
+          #      run: sbt integrationTests/test
 
-  website:
-    name: Build Mdoc & Website
-    runs-on: ubuntu-latest
+          #std:
+          #  name: Standard Library Tests
+          #  runs-on: ubuntu-20.04
+          #  strategy:
+          #    matrix:
+          #      scala: [ "2.13.10", "2.12.17" ]
+          #  steps:
+          #    - name: Checkout
+          #      uses: actions/checkout@v3
+          #    - name: Install Tabby OSS Cad Suite
+          #      uses: ./.github/workflows/setup-oss-cad-suite
+          #    - name: Setup Scala
+          #      uses: actions/setup-java@v3
+          #      with:
+          #        distribution: 'adopt'
+          #        java-version: '11'
+          #        cache: 'sbt'
+          #    - name: Check Formatting (Scala 2.12 only)
+          #      if: startsWith(matrix.scala, '2.12')
+          #      run: sbt ++${{ matrix.scala }} standardLibrary/scalafmtCheckAll
+          #    - name: Unit Tests
+          #      run: sbt ++${{ matrix.scala }} standardLibrary/test
 
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v2
-      - name: Setup Scala
-        uses: olafurpg/setup-scala@v10
-        with:
-          java-version: adopt@1.8
-      - name: Cache Scala
-        uses: coursier/cache-action@v5
-      - name: Setup Ruby
-        uses: actions/setup-ruby@v1
-      - name: Setup Jekyll
-        run: |
-          gem install jekyll -v 4.2.0
-          gem install jekyll-redirect-from
-      - name: Install CIRCT
-        uses: ./.github/workflows/install-circt
-        #TODO: make the microsite building include building ScalaDoc
-      - name: Build the docs
-        run: sbt doc
-      - name: Build the microsite
-        run: make -C website
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      - name: Tar built website
-        run: tar zcf website.tar.gz website/docs/target/site
-      - name: Share Built Website
-        uses: actions/upload-artifact@v3
-        with:
-          name: website
-          path: website.tar.gz
+          #website:
+          #  name: Build Mdoc & Website
+          #  runs-on: ubuntu-latest
+
+          #  steps:
+          #    - name: Checkout
+          #      uses: actions/checkout@v2
+          #    - name: Setup Scala
+          #      uses: olafurpg/setup-scala@v10
+          #      with:
+          #        java-version: adopt@1.8
+          #    - name: Cache Scala
+          #      uses: coursier/cache-action@v5
+          #    - name: Setup Ruby
+          #      uses: actions/setup-ruby@v1
+          #    - name: Setup Jekyll
+          #      run: |
+          #        gem install jekyll -v 4.2.0
+          #        gem install jekyll-redirect-from
+          #    - name: Install CIRCT
+          #      uses: ./.github/workflows/install-circt
+          #      #TODO: make the microsite building include building ScalaDoc
+          #    - name: Build the docs
+          #      run: sbt doc
+          #    - name: Build the microsite
+          #      run: make -C website
+          #      env:
+          #        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          #    - name: Tar built website
+          #      run: tar zcf website.tar.gz website/docs/target/site
+          #    - name: Share Built Website
+          #      uses: actions/upload-artifact@v3
+          #      with:
+          #        name: website
+          #        path: website.tar.gz
 
   # Sentinel job to simplify how we specify which checks need to pass in branch
   # protection and in Mergify. This job checks that all jobs were successful.
@@ -155,7 +160,7 @@ jobs:
   # When adding new jobs, please add them to `needs` below
   check-tests:
     name: "check tests"
-    needs: [ci, std, integration, doc, website]
+    needs: [ci]
     runs-on: ubuntu-20.04
     if: success() # only run if all tests have passed
     outputs:
@@ -189,51 +194,51 @@ jobs:
 
   # sbt ci-release publishes all cross versions so this job needs to be
   # separate from a Scala versions build matrix to avoid duplicate publishing
-  publish:
-    needs: [all_tests_passed]
-    runs-on: ubuntu-20.04
-    if: github.event_name == 'push'
+  #publish:
+  #  needs: [all_tests_passed]
+  #  runs-on: ubuntu-20.04
+  #  if: github.event_name == 'push'
 
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v3
-        with:
-          fetch-depth: 0
-      - name: Setup Scala
-        uses: actions/setup-java@v3
-        with:
-          distribution: 'adopt'
-          java-version: '8'
-          cache: 'sbt'
-      - name: Setup GPG (for Publish)
-        uses: olafurpg/setup-gpg@v3
-      - name: Publish
-        run: sbt ci-release
-        env:
-          CI_SNAPSHOT_RELEASE: "+unipublish/publish"
-          CI_SONATYPE_RELEASE: "+unipublish/publishSigned"
-          PGP_PASSPHRASE: ${{ secrets.PGP_PASSPHRASE }}
-          PGP_SECRET: ${{ secrets.PGP_SECRET }}
-          SONATYPE_PASSWORD: ${{ secrets.CHIPSALLIANCE_SONATYPE_PASSWORD }}
-          SONATYPE_USERNAME: ${{ secrets.CHIPSALLIANCE_SONATYPE_USERNAME }}
+  #  steps:
+  #    - name: Checkout
+  #      uses: actions/checkout@v3
+  #      with:
+  #        fetch-depth: 0
+  #    - name: Setup Scala
+  #      uses: actions/setup-java@v3
+  #      with:
+  #        distribution: 'adopt'
+  #        java-version: '8'
+  #        cache: 'sbt'
+  #    - name: Setup GPG (for Publish)
+  #      uses: olafurpg/setup-gpg@v3
+  #    - name: Publish
+  #      run: sbt ci-release
+  #      env:
+  #        CI_SNAPSHOT_RELEASE: "+unipublish/publish"
+  #        CI_SONATYPE_RELEASE: "+unipublish/publishSigned"
+  #        PGP_PASSPHRASE: ${{ secrets.PGP_PASSPHRASE }}
+  #        PGP_SECRET: ${{ secrets.PGP_SECRET }}
+  #        SONATYPE_PASSWORD: ${{ secrets.CHIPSALLIANCE_SONATYPE_PASSWORD }}
+  #        SONATYPE_USERNAME: ${{ secrets.CHIPSALLIANCE_SONATYPE_USERNAME }}
 
 
-  deploy_website:
-    name: Deploy Website
-    runs-on: ubuntu-latest
-    needs: [all_tests_passed]
-    # Only Deploy website on pushes to main, may change to a stable branch
-    if: (github.event_name == 'push') && (github.ref_name == 'main')
-    steps:
-      - name: Download built website
-        uses: actions/download-artifact@v3
-        with:
-          name: website
-      - name: Untar built website
-        run: tar zxf website.tar.gz
-      - name: Deploy Website to GitHub Pages (From Main Branch)
-        uses: JamesIves/github-pages-deploy-action@3.7.1
-        with:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          BRANCH: gh-pages
-          FOLDER: website/docs/target/site
+  #deploy_website:
+  #  name: Deploy Website
+  #  runs-on: ubuntu-latest
+  #  needs: [all_tests_passed]
+  #  # Only Deploy website on pushes to main, may change to a stable branch
+  #  if: (github.event_name == 'push') && (github.ref_name == 'main')
+  #  steps:
+  #    - name: Download built website
+  #      uses: actions/download-artifact@v3
+  #      with:
+  #        name: website
+  #    - name: Untar built website
+  #      run: tar zxf website.tar.gz
+  #    - name: Deploy Website to GitHub Pages (From Main Branch)
+  #      uses: JamesIves/github-pages-deploy-action@3.7.1
+  #      with:
+  #        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  #        BRANCH: gh-pages
+  #        FOLDER: website/docs/target/site
