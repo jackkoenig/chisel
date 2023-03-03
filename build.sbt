@@ -67,6 +67,13 @@ lazy val publishSettings = Seq(
     </licenses>,
   sonatypeCredentialHost := "s01.oss.sonatype.org",
   sonatypeRepository := "https://s01.oss.sonatype.org/service/local",
+  publish / skip := {
+    val v = version.value
+    if (dynverGitDescribeOutput.value.hasNoTags) {
+      sys.error(s"Failed to derive version from git tags. Maybe run `git fetch --unshallow`? Version: $v")
+    }
+    (publish / skip).value
+  },
   publishTo := {
     val v = version.value
     val nexus = "https://s01.oss.sonatype.org/"
