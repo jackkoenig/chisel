@@ -13,13 +13,14 @@
 #### Type of Improvement
 
 <!-- Choose one or more from the following:
-- bug fix
-- performance improvement
-- documentation
-- code refactoring
-- code cleanup
-- backend code generation
-- new feature/API
+- Feature (or new API)
+- Performance improvement
+- API modification
+- API deprecation
+- Bugfix
+- Documentation or website-related
+- Dependency update
+- Internal or build-related (includes code refactoring/cleanup)
 -->
 
 #### API Impact
@@ -45,7 +46,7 @@ Text from here to the end of the body will be considered for inclusion in the re
 -->
 
 ### Reviewer Checklist (only modified by reviewer)
-- [ ] Did you add the appropriate labels?
+- [ ] Did you add the appropriate labels? (Select the most appropriate one based on the "Type of Improvement")
 - [ ] Did you mark the proper milestone (Bug fix: `3.5.x` or `3.6.x` depending on impact, API modification or big change: `5.0.0`)?
 - [ ] Did you review?
 - [ ] Did you check whether all relevant Contributor checkboxes have been checked?
