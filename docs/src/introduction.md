@@ -1,7 +1,5 @@
 ---
-layout: docs
-title:  "Introduction"
-section: "chisel3"
+sidebar_position: 0
 ---
 
 # An Introduction to Chisel

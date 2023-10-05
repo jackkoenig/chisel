@@ -1,5 +1,6 @@
 // See LICENSE for license details.
 
+
 enablePlugins(SiteScaladocPlugin)
 
 addCommandAlias("fmt", "; scalafmtAll ; scalafmtSbt")

@@ -1,7 +1,5 @@
 ---
-layout: docs
-title:  "Explanations"
-section: "chisel3"
+sidebar_position: 2
 ---
 
 # Explanations

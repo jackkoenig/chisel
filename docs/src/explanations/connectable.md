@@ -10,13 +10,13 @@ section: "chisel3"
  * [Alignment: Flipped vs Aligned](#alignment-flipped-vs-aligned)
  * [Input/Output](#inputoutput)
  * [Connecting components with fully aligned members](#connecting-components-with-fully-aligned-members)
-   * [Mono-direction connection operator (:=)](#mono-direction-connection-operator-)
+   * [Mono-direction connection operator (`:=`)](#mono-direction-connection-operator-)
  * [Connecting components with mixed alignment members](#connecting-components-with-mixed-alignment-members)
-   * [Bi-direction connection operator (:<>=)](#bi-direction-connection-operator-)
+   * [Bi-direction connection operator (`:<>=`)](#bi-direction-connection-operator-)
    * [Port-Direction Computation versus Connection-Direction Computation](#port-direction-computation-versus-connection-direction-computation)
-   * [Aligned connection operator (:<=)](#aligned-connection-operator-)
-   * [Flipped connection operator (:>=)](#flipped-connection-operator-)
-   * [Coercing mono-direction connection operator (:#=)](#coercing-mono-direction-connection-operator-)
+   * [Aligned connection operator (`:<=`)](#aligned-connection-operator-)
+   * [Flipped connection operator (`:>=`)](#flipped-connection-operator-)
+   * [Coercing mono-direction connection operator (`:#=`)](#coercing-mono-direction-connection-operator-)
  * [Connectable](#connectable)
    * [Connecting Records](#connecting-records)
    * [Defaults with waived connections](#defaults-with-waived-connections)
@@ -259,7 +259,7 @@ First we will introduce the most common Chisel connection operator, `:<>=`, usef
 Then, we will explore the remainder of the the Chisel connection operators.
 
 
-### Bi-direction connection operator (:<>=)
+### Bi-direction connection operator (`:<>=`)
 
 For connections where you want 'bulk-connect-like-semantics' where the aligned members are driven producer-to-consumer and flipped members are driven consumer-to-producer, use `:<>=`.
 
