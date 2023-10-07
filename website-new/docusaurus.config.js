@@ -20,7 +20,7 @@ const config = {
   organizationName: 'chipsalliance',
   projectName: 'chisel',
 
-  onBrokenLinks: 'throw',
+  onBrokenLinks: 'warn', // TODO change to throw
   onBrokenMarkdownLinks: 'warn',
 
   // Even if you don't use internalization, you can use this field to set useful

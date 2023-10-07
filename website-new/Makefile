@@ -16,6 +16,8 @@ chisel3 = ../
 chisel-non-website = \
   $(shell git ls-files $(chisel_dir) --exclude-per-directory $(relative_to_this_dir))
 
+default: build
+
 # Using introduction as standin for all md files
 # Note this doesn't work when a markdown file is deleted
 $(mdoc_out)/introduction.md: $(chisel-non-website)
@@ -25,10 +27,10 @@ $(this_dir)/docs/introduction.md: $(mdoc_out)/introduction.md
 	mkdir -p $(shell dirname $@)
 	cp -R $(mdoc_out)/* $(this_dir)/docs/
 
-jack: $(this_dir)/docs/introduction.md
-	@echo $(relative_to_this_dir)
+build: $(this_dir)/docs/introduction.md
+	cd $(this_dir) && npm run build
 
 clean:
-	rm -rf $(this_dir)/docs
+	rm -rf $(this_dir)/docs $(this_dir)/build
 
 .PHONY: clean
