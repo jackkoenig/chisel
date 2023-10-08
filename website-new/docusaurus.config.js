@@ -11,10 +11,11 @@ const config = {
   favicon: 'img/chisel-tool-icon.svg',
 
   // Set the production url of your site here
-  url: 'https://chisel-lang.org',
+  //url: 'https://chisel-lang.org',
+  url: 'https://jackkoenig.github.io/',
   // Set the /<baseUrl>/ pathname under which your site is served
   // For GitHub pages deployment, it is often '/<projectName>/'
-  baseUrl: '/',
+  baseUrl: '/chisel/',
 
   // GitHub pages deployment config.
   organizationName: 'chipsalliance',
@@ -57,7 +58,7 @@ const config = {
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
     ({
       // Replace with your project's social card
-      image: 'img/docusaurus-social-card.jpg',
+      image: 'img/chisel-tool.svg',
       navbar: {
         title: 'Chisel',
         logo: {
@@ -66,6 +67,7 @@ const config = {
         },
         items: [
           {to: '/docs/introduction', label: 'Docs', position: 'left'},
+          {to: '/community', label: 'Community', position: 'left'},
           //{
           //  type: 'docSidebar',
           //  sidebarId: 'tutorialSidebar',
