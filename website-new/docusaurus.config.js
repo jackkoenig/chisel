@@ -68,6 +68,7 @@ const config = {
         items: [
           {to: '/docs/introduction', label: 'Docs', position: 'left'},
           {to: '/community', label: 'Community', position: 'left'},
+          {to: '/api', label: 'API', position: 'left'},
           //{
           //  type: 'docSidebar',
           //  sidebarId: 'tutorialSidebar',
@@ -91,6 +92,10 @@ const config = {
                 label: 'Introduction',
                 to: '/docs/introduction',
               },
+              {
+                label: 'ScalaDoc',
+                href: 'https://javadoc.io/doc/org.chipsalliance/chisel_2.13/latest/index.html'
+              }
             ],
           },
           {
@@ -138,7 +143,23 @@ const config = {
         ],
       },
     }),
+
+  plugins: [
+    [
+      '@docusaurus/plugin-client-redirects',
+      {
+        redirects: [
+          // /docs/oldDoc -> /docs/newDoc
+          //{
+          //  to: 'https://s01.oss.sonatype.org/service/local/repositories/snapshots/archive/org/chipsalliance/chisel_2.13/6.0.0-M3+55-6dbbc73c-SNAPSHOT/chisel_2.13-6.0.0-M3+55-6dbbc73c-SNAPSHOT-javadoc.jar/!/index.html',
+          //  from: ['/chisel/api/latest'],
+          //},
+        ],
+      },
+    ],
+  ],
 };
+
 
 module.exports = config;
 
