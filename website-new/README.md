@@ -1,41 +1,51 @@
 # Website
 
-This website is built using [Docusaurus 2](https://docusaurus.io/), a modern static website generator.
+This website is built using [Docusaurus 3](https://docusaurus.io/), a modern static website generator built in JavaScript using React.
 
-### Installation
+## Dependencies
 
-```
-$ yarn
-```
+Building the website requires the usual [Chisel Setup](../SETUP.md), in addition to Node.js and npm.
 
-### Local Development
+Please follow the [official npm instructions](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm) for installing Node.js and npm.
 
-```
-$ yarn start
-```
+In the likely event that these instructions become out-of-date, please see the [Github Actions workflows](../.github/workflows) for how the website is tested and deployed in CI.
 
-This command starts a local development server and opens up a browser window. Most changes are reflected live without having to restart the server.
+## Installation
 
-### Build
+Before running anything else you need to install all website dependencies.
 
 ```
-$ yarn build
+make install
 ```
 
-This command generates static content into the `build` directory and can be served using any static contents hosting service.
+## Build
 
-### Deployment
-
-Using SSH:
+As the website depends on information and documentation compiled using sbt, we have wrapped the calls to sbt and npm with a Makefile in this directory.
 
 ```
-$ USE_SSH=true yarn deploy
+make build
 ```
 
-Not using SSH:
+This command generates the static website into the `build` directory.
+It has many steps handled by the [Makefile](./Makefile):
+
+1. Compile the Chisel Scala source code
+2. Run mdoc to generate markdown for the website
+3. Copy the generaeted markdown into `docs/`
+4. Determine contributors to the Chisel project and generate `src/pages/generated/contributors.md`
+5. Run docusaurus to generate the website
+
+## Development
+
+You can view the built website locally with:
 
 ```
-$ GIT_USER=<Your GitHub username> yarn deploy
+make serve
 ```
 
-If you are using GitHub pages for hosting, this command is a convenient way to build the website and push to the `gh-pages` branch.
+This will locally host the website so that you can see the impact of any local changes.
+
+## Deployment
+
+Deployment is handled automatically upon push to main by CI.
+

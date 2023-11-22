@@ -10,6 +10,7 @@ subprojects = $(buildDir)/subprojects
 docs = $(buildDir)/docs
 website_docs_dest = docs/src/main/tut/chisel3/docs
 chisel3 = ../
+install_timestamp = $(this_dir)/node_modules/timestamp
 
 # Everything not in the website directory
 # This is overly conservative but okay until we can do something more precise
@@ -34,14 +35,20 @@ $(contributors): $(chisel-non-website)
 	mkdir -p $(shell dirname $@)
 	cd $(chisel_dir) && sbt docs/determineContributors
 
-build: $(this_dir)/docs/introduction.md $(contributors)
+$(install_timestamp): $(this_dir)/package.json $(this_dir)/package-lock.json
+	cd $(this_dir) && npm install
+	touch $@
+
+install: $(install_timestamp)
+
+build: $(this_dir)/docs/introduction.md $(contributors) $(install_timestamp)
 	cd $(this_dir) && npm run build
 
 # Must run build first
-serve:
+serve: build
 	cd $(this_dir) && npm run serve
 
 clean:
-	rm -rf $(this_dir)/docs $(this_dir)/build
+	rm -rf $(this_dir)/docs $(this_dir)/build $(this_dir)/src/pages/generated
 
-.PHONY: clean
+.PHONY: clean serve install
