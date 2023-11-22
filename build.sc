@@ -8,6 +8,8 @@ import mill.scalalib.api.ZincWorkerUtil.matchingVersions
 import $file.common
 import $file.project.Boilerplate
 
+import $ivy.`org.scalameta::mdoc:2.3.7`
+
 object v {
   val pluginScalaCrossVersions = Seq(
     "2.13.0",
@@ -296,5 +298,28 @@ trait CIRCTPanamaBinderModuleTest
 
   override def sources = T.sources {
     Seq(PathRef(millSourcePath / "src" / "test"))
+  }
+}
+
+object docs extends Module {
+  def scalaVersion = v.scalaCrossVersions.head
+  def chiselClasspath = T { chisel(scalaVersion).runClasspath().map(_.path).mkString(":") }
+
+  def sources = T.sources { millSourcePath / "src" / "cookbooks" }
+
+  def sourceFiles = T { Lib.findSourceFiles(sources(), Seq("md")).map(PathRef(_)) }
+
+  def oneSource = T { sourceFiles().apply(2) }
+
+  def outputDirectory = T { T.workspace / "docs-out" }
+
+  def go = T {
+    val settings = mdoc.MainSettings()
+      .withSiteVariables(Map("BUILD_DIR" -> "docs-target"))
+      .withClasspath(chiselClasspath())
+      .withInputPaths(List(oneSource().path.toNIO))
+      .withOut(outputDirectory().toNIO)
+    val res = mdoc.Main.process(settings)
+    res.toString
   }
 }

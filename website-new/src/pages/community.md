@@ -6,6 +6,8 @@ position: 16
 redirect_from: /documentation
 ---
 
+import Contributors from './generated/contributors.md'
+
 ## Chisel Users Community
 
 If you're a Chisel user and want to stay connected to the wider user community, any of the following are great avenues:
@@ -75,7 +77,7 @@ If you want to get *more involved* with the Chisel/FIRRTL ecosystem of projects,
 Chisel, FIRRTL, and all related projects would not be possible without the contributions of our fantastic developer community.
 The following people have contributed to the current release of the projects:
 
-{% include_relative contributors.md %}
+<Contributors />
 
 ## Papers
 

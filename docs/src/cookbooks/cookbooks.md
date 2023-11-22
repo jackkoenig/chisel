@@ -1,7 +1,5 @@
 ---
-layout: docs
-title:  "Cookbooks"
-section: "chisel3"
+sidebar_position: 1
 ---
 
 # Cookbooks

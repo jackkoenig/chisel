@@ -1,7 +1,5 @@
 ---
-layout: docs
-title:  "Appendix"
-section: "chisel3"
+sidebar_position: 3
 ---
 
 # Appendix
