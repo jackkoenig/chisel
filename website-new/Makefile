@@ -27,8 +27,19 @@ $(this_dir)/docs/introduction.md: $(mdoc_out)/introduction.md
 	mkdir -p $(shell dirname $@)
 	cp -R $(mdoc_out)/* $(this_dir)/docs/
 
-build: $(this_dir)/docs/introduction.md
+contributors = $(this_dir)/src/pages/generated/contributors.md
+
+# Unclear what this should depend on
+$(contributors): $(chisel-non-website)
+	mkdir -p $(shell dirname $@)
+	cd $(chisel_dir) && sbt docs/determineContributors
+
+build: $(this_dir)/docs/introduction.md $(contributors)
 	cd $(this_dir) && npm run build
+
+# Must run build first
+serve:
+	cd $(this_dir) && npm run serve
 
 clean:
 	rm -rf $(this_dir)/docs $(this_dir)/build
