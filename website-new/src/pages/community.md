@@ -75,7 +75,7 @@ If you want to get *more involved* with the Chisel/FIRRTL ecosystem of projects,
 Chisel, FIRRTL, and all related projects would not be possible without the contributions of our fantastic developer community.
 The following people have contributed to the current release of the projects:
 
-{% include_relative contributors.md %}
+\{% include_relative contributors.md %}
 
 ## Papers
 
