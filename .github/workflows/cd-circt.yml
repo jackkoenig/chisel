@@ -2,23 +2,19 @@ name: 'CD (firtool)'
 
 on:
   workflow_dispatch:
-  # Run every 15 minutes.
-  schedule:
-    - cron: '*/15 * * * *'
 
 jobs:
   cd-circt:
     name: 'Check Version, Create PR'
     runs-on: ubuntu-22.04
     steps:
-      - name: 'circt/update-circt'
-        uses: circt/update-circt@v1
+      - name: 'jackkoenig/update-circt'
+        uses: jackkoenig/update-circt@should-create-pr
         with:
           user: chiselbot
           email: chiselbot@users.noreply.github.com
           pr-labels: |
             Dependency Update
           pr-reviewers: |
-            seldridge
             jackkoenig
-          github-token: ${{ secrets.CHISEL_BOT_TOKEN }}
+          should-create-pr: 'yes.sh'
