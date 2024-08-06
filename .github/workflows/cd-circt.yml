@@ -17,4 +17,4 @@ jobs:
             Dependency Update
           pr-reviewers: |
             jackkoenig
-          should-create-pr: './yes.sh'
+          should-create-pr: '.github/no.sh'
