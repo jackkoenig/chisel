@@ -17,3 +17,4 @@ jobs:
             Dependency Update
           pr-reviewers: |
             jackkoenig
+          should-create-pr: './yes.sh'
