@@ -13,7 +13,7 @@ on:
           an error. Note, the default value 'true' is the shell built-in, not a
           boolean value.
         type: string
-        default: 'true'
+        default: 'exit 0 $1'
 
 jobs:
   cd-circt:
